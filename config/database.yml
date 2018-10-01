@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['PG_USERNAME'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: carent_development
+
+test:
+  <<: *default
+  database: carent_test
+
+production:
+  <<: *default
+  database: carent_production
+  username: carent
+  password: <%= ENV['CARENT_DATABASE_PASSWORD'] %>
