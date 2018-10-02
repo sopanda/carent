@@ -34,32 +34,32 @@ ActiveRecord::Schema.define(version: 2018_10_02_120311) do
     t.index ["renter_id"], name: "index_bookings_on_renter_id"
   end
 
+  create_table "car_makes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "car_models", force: :cascade do |t|
+    t.string "name"
+    t.bigint "car_make_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_make_id"], name: "index_car_models_on_car_make_id"
+  end
+
   create_table "cars", force: :cascade do |t|
     t.bigint "owner_id"
-    t.bigint "make_id"
-    t.bigint "model_id"
+    t.bigint "car_make_id"
+    t.bigint "car_model_id"
     t.integer "year"
     t.bigint "body_style_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body_style_id"], name: "index_cars_on_body_style_id"
-    t.index ["make_id"], name: "index_cars_on_make_id"
-    t.index ["model_id"], name: "index_cars_on_model_id"
+    t.index ["car_make_id"], name: "index_cars_on_car_make_id"
+    t.index ["car_model_id"], name: "index_cars_on_car_model_id"
     t.index ["owner_id"], name: "index_cars_on_owner_id"
-  end
-
-  create_table "makes", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "models", force: :cascade do |t|
-    t.string "name"
-    t.bigint "make_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["make_id"], name: "index_models_on_make_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 2018_10_02_120311) do
 
   add_foreign_key "bookings", "cars"
   add_foreign_key "bookings", "users", column: "renter_id"
+  add_foreign_key "car_models", "car_makes"
   add_foreign_key "cars", "body_styles"
-  add_foreign_key "cars", "makes"
-  add_foreign_key "cars", "models"
+  add_foreign_key "cars", "car_makes"
+  add_foreign_key "cars", "car_models"
   add_foreign_key "cars", "users", column: "owner_id"
-  add_foreign_key "models", "makes"
 end
