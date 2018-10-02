@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :cars, foreign_key: 'owner_id'
+  has_many :bookings, foreign_key: 'renter_id'
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :username, uniqueness: { case_sensitive: false }, format: { without: /\s/ }
