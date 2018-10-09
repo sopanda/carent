@@ -5,7 +5,6 @@ class CreateCars < ActiveRecord::Migration[5.2]
       t.references :car_make, foreign_key: true
       t.references :car_model, foreign_key: true
       t.integer :year
-      t.references :body_style, foreign_key: true
 
       t.timestamps
     end

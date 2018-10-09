@@ -15,12 +15,6 @@ ActiveRecord::Schema.define(version: 2018_10_02_120311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "body_styles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "bookings", force: :cascade do |t|
     t.bigint "renter_id"
     t.bigint "car_id"
@@ -53,10 +47,8 @@ ActiveRecord::Schema.define(version: 2018_10_02_120311) do
     t.bigint "car_make_id"
     t.bigint "car_model_id"
     t.integer "year"
-    t.bigint "body_style_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["body_style_id"], name: "index_cars_on_body_style_id"
     t.index ["car_make_id"], name: "index_cars_on_car_make_id"
     t.index ["car_model_id"], name: "index_cars_on_car_model_id"
     t.index ["owner_id"], name: "index_cars_on_owner_id"
@@ -75,7 +67,6 @@ ActiveRecord::Schema.define(version: 2018_10_02_120311) do
   add_foreign_key "bookings", "cars"
   add_foreign_key "bookings", "users", column: "renter_id"
   add_foreign_key "car_models", "car_makes"
-  add_foreign_key "cars", "body_styles"
   add_foreign_key "cars", "car_makes"
   add_foreign_key "cars", "car_models"
   add_foreign_key "cars", "users", column: "owner_id"
