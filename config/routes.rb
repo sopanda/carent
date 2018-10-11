@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
-  post 'auth', to: 'user_token#create'
+  post 'login', to: 'user_token#create'
+  post 'registration', to: 'users#create'
+
+  resources :users, except: [:create]
 end
