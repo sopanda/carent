@@ -35,3 +35,4 @@ end
 #gem 'apitome'
 gem 'knock'
 gem 'figaro'
+gem 'geocoder'
