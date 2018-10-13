@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-  before_action :authenticate_user, except: %i[create]
+  before_action :authenticate_user, except: %i[index show]
   before_action :set_car, only: %i[show update destroy]
 
   def index
