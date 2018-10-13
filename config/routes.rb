@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post 'registration', to: 'users#create'
 
   resources :users, except: [:create]
+  resources :cars
 end
