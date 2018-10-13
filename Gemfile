@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
-gem 'pry'
+gem 'pry-rails'
 gem 'rails', '~> 5.2.1'
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.11'
@@ -36,3 +36,4 @@ end
 gem 'knock'
 gem 'figaro'
 gem 'geocoder'
+gem 'has_scope'

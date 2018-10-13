@@ -2,10 +2,11 @@ class CarsController < ApplicationController
   before_action :authenticate_user, except: %i[index show]
   before_action :set_car, only: %i[show update destroy]
 
+  has_scope :price
   def index
     set_car_params
     @cars = NearestCarsService.new(@latitude, @longitude, @range).perform
-    render json: @cars
+    render json: apply_scopes(@cars)
   end
 
   def show
