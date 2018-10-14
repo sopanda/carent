@@ -14,7 +14,7 @@ class BookingsController < ApplicationController
   def create
     booking = Booking.new(booking_params)
     if booking.save
-      render json: { msg: 'Booking was created' }, status: :created
+      render json: { msg: "Booking ##{booking.id} was created" }, status: :created
     else
       render json: { errors: booking.errors.full_messages }, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
 
   def update
     if @booking.update(booking_params)
-      render json: { msg: 'Booking has been updated' }
+      render json: { msg: "Booking ##{@booking.id} has been updated" }
     else
       render json: { errors: @booking.errors.full_messages }, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class BookingsController < ApplicationController
 
   def destroy
     if @booking.destroy
-      render json: { msg: 'Booking has been deleted' }
+      render json: { msg: "Booking ##{@booking} has been deleted" }
     else
       render json: { errors: @booking.errors.full_messages }, status: :unprocessable_entity
     end

@@ -16,7 +16,7 @@ class CarsController < ApplicationController
   def create
     car = Car.new(car_params)
     if car.save
-      render json: { msg: 'Car was created' }, status: :created
+      render json: { msg: "Car ##{car.id} was created" }, status: :created
     else
       render json: { errors: car.errors.full_messages }, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class CarsController < ApplicationController
 
   def update
     if @car.update(car_params)
-      render json: { msg: 'Car has been updated' }
+      render json: { msg: "Car ##{@car.id} has been updated" }
     else
       render json: { errors: @car.errors.full_messages }, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class CarsController < ApplicationController
 
   def destroy
     if @car.destroy
-      render json: { msg: 'Car has been deleted' }
+      render json: { msg: "Car ##{@car.id} has been deleted" }
     else
       render json: { errors: @car.errors.full_messages }, status: :unprocessable_entity
     end

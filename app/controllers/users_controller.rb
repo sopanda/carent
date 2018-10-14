@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       token = Knock::AuthToken.new(payload: { sub: user.id }).token
-      render json: { msg: 'User was created', token: token }, status: :created
+      render json: { msg: "User ##{user.id} was created", token: token }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   
   def update 
     if @user.update(user_params)
-      render json: { msg: 'User has been updated' }
+      render json: { msg: "User ##{@user.id} has been updated" }
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   
   def destroy 
     if @user.destroy
-      render json: { msg: 'User has been deleted' }
+      render json: { msg: "User ##{@user.id} has been deleted" }
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
