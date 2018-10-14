@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       resource :status, only: :update, controller: 'status'
     end
   end
+  resources :bookings
 end
