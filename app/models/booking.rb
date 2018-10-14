@@ -3,8 +3,9 @@ class Booking < ApplicationRecord
   
   belongs_to :renter, class_name: 'User', foreign_key: 'renter_id'
   belongs_to :car
+  has_many :reviews
 
-  validates_presence_of :daily_price, :start_date, :end_date
+  validates_presence_of :start_date, :end_date
   validates_with ::BookingValidator
 
 
