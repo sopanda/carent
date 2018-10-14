@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user
+  #before_action :authenticate_user
 
   def index
-    render json: 'hello world'
+    render json: { msg: 'hello world' }
   end
 end
