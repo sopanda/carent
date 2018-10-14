@@ -7,5 +7,5 @@ class User < ApplicationRecord
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :username, uniqueness: { case_sensitive: false }, format: { without: /\s/ }
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :first_name, :last_name, :email
 end
