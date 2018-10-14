@@ -28,7 +28,8 @@ group :test do
   gem 'rspec-rails'
   gem 'ffaker'
   gem 'factory_bot_rails'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
   gem 'database_cleaner'
 end
 
