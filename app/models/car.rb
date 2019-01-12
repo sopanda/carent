@@ -5,10 +5,8 @@ class Car < ApplicationRecord
 
   validates :year, inclusion: 1960..2018
 
-  #reverse_geocoded_by :latitude, :longitude
+  reverse_geocoded_by :latitude, :longitude
   after_validation :set_geocoded_address
-
-  scope :price, ->(type) { order("daily_price #{type}") }
 
   def set_geocoded_address
     raw_address = Geocoder.search("#{latitude}, #{longitude}").first.data['address']

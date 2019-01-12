@@ -5,9 +5,9 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show update destroy]
 
   def index
-    fetch_service.call
-    return render_error(fetch_service) unless fetch_service.valid?
-    render_200(fetch_service.data)
+    index_service.call
+    return render_error(index_service) unless index_service.valid?
+    render_200(index_service.data)
   end
 
   def show
@@ -41,10 +41,15 @@ class CarsController < ApplicationController
 
   private
 
-  def fetch_service
-    @fetch_service ||= ::Api::Cars::NearestCarsService.new(latitude: params[:latitude],
-                                                           longitude: params[:longitude],
-                                                           range: params[:range])
+  def index_service
+    @fetch_service ||= ::Api::Cars::Index.new(latitude:  params[:latitude],
+                                              longitude: params[:longitude],
+                                              range:     params[:range],
+                                              filters:   filter_params)
+  end
+
+  def filter_params
+    params.permit(:price)
   end
 
   def set_car
