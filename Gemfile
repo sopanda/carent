@@ -36,9 +36,9 @@ group :test do
 end
 
 # gem 'apitome'
+gem 'active_model_serializers'
 gem 'figaro'
 gem 'geocoder'
 gem 'has_scope'
 gem 'knock'
 gem 'virtus'
-gem 'active_model_serializers'

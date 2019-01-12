@@ -4,48 +4,46 @@ class CarsController < ApplicationController
   # before_action :authenticate_user, except: %i[index show]
   before_action :set_car, only: %i[show update destroy]
 
+  attr_reader :car
+
   def index
     index_service.call
-    return render_error(index_service) unless index_service.valid?
+    return render_error(index_service) if index_service.errors.present?
     render_200(index_service.data)
   end
 
   def show
-    render json: @car
+    render_200(car)
   end
 
   def create
-    car = Car.new(car_params)
-    if car.save
-      render json: { msg: "Car ##{car.id} was created" }, status: :created
-    else
-      render_error(car)
-    end
+    created_car = Car.create(car_params.merge(owner: current_user))
+    return render_error(created_car) if created_car.errors.present?
+    render_200(created_car)
   end
 
   def update
-    if @car.update(car_params)
-      render json: { msg: "Car ##{@car.id} has been updated" }
-    else
-      render_error(@car)
-    end
+    car.update(car_params)
+    return render_error(car) if car.errors.present?
+    render_200(car)
   end
 
   def destroy
-    if @car.destroy
-      render json: { msg: "Car ##{@car.id} has been deleted" }
-    else
-      render_error(@car)
-    end
+    car.destroy
+    render_200(msg: 'Successfully deleted')
   end
 
   private
 
   def index_service
-    @fetch_service ||= ::Api::Cars::Index.new(latitude:  params[:latitude],
+    @index_service ||= ::Api::Cars::Index.new(latitude: params[:latitude],
                                               longitude: params[:longitude],
-                                              range:     params[:range],
-                                              filters:   filter_params)
+                                              range: params[:range],
+                                              filters: filter_params)
+  end
+
+  def car_params
+    params.permit(:model, :year, :latitude, :longitude, :daily_price)
   end
 
   def filter_params
