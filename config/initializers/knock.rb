@@ -1,5 +1,6 @@
-Knock.setup do |config|
+# frozen_string_literal: true
 
+Knock.setup do |config|
   ## How long before a token is expired. If nil is provided, token will
   config.token_lifetime = 1.hour
 

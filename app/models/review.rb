@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Review < ApplicationRecord
   belongs_to :booking
-  belongs_to :author, class_name: 'User', foreign_key: 'author_id'
+
+  belongs_to :author, class_name: 'User'
 
   validates :rating, numericality: { less_than_or_equal_to: 5 }
-  validates_presence_of :text
-  #validates_with ::ReviewValidator
+  validates :text, presence: true
 end

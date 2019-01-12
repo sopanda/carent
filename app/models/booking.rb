@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 class Booking < ApplicationRecord
-  enum status: [:started_soon, :ongoing, :ended]
-  
-  belongs_to :renter, class_name: 'User', foreign_key: 'renter_id'
+  enum status: %i[started_soon ongoing ended]
+
+  belongs_to :renter, inverse_of: :bookings, class_name: 'User'
   belongs_to :car
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
-  validates_presence_of :start_date, :end_date
-  validates_with ::BookingValidator
-
+  validates :start_date, :end_date, presence: true
+  validates_with ::Bookings::DateValidator
 
   def total_rent_price
     daily_price * total_days

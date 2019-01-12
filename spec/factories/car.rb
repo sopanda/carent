@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :car do
     owner
-    car_make
-    car_model
+    model       { FFaker::Vehicle.model }
     year        { FFaker::Vehicle.year }
     latitude    { FFaker::Geolocation.lat }
     longitude   { FFaker::Geolocation.lng }

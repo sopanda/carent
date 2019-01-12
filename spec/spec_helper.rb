@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'rspec-rails'
 require 'rspec_api_documentation'
@@ -18,5 +20,5 @@ end
 
 RspecApiDocumentation.configure do |config|
   config.format = :json
-  config.docs_dir = Rails.root.join("doc", "api")
+  config.docs_dir = Rails.root.join('doc', 'api')
 end

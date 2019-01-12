@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'home#index'
-  post 'login', to: 'user_token#create'
-  post 'registration', to: 'users#create'
+
+  post 'sign_in', to: 'user_token#create'
+  post 'sign_up', to: 'users#create'
 
   resources :users, except: :create
-  resources :cars do
-    scope module: 'cars' do
-      resource :status, only: :update, controller: 'status'
-    end
-  end
+
+  resources :cars
+
   resources :bookings do
     resources :reviews
   end

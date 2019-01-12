@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'database_cleaner'
 require 'factory_bot'
 require 'shoulda-matchers'
 require 'ffaker'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 
 ENV['RAILS_ENV'] ||= 'test'
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 
-Dir[Rails.root.join("spec/factories/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join('spec/factories/**/*.rb')].each { |f| require f }
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

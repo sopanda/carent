@@ -1,0 +1,20 @@
+AllCops:
+  TargetRubyVersion: 2.4.4
+  Exclude:
+    # You could specify set of files or dirs while you want to be ignored by rubocop
+    - 'spec/**/*'
+    - 'Rakefile'
+    - 'db/**/*'
+    - 'bin/*'
+    - 'lib/*'
+    - 'config/**/*'
+Documentation:
+  Enabled: false
+Rails:
+  Enabled: true
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+Rails/InverseOf:
+  Enabled: false

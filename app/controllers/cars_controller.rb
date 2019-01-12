@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class CarsController < ApplicationController
-  #before_action :authenticate_user, except: %i[index show]
+  # before_action :authenticate_user, except: %i[index show]
   before_action :set_car, only: %i[show update destroy]
 
-  has_scope :price
   def index
-    set_car_params
-    @cars = NearestCarsService.new(@latitude, @longitude, @range).perform
-    render json: apply_scopes(@cars)
+    fetch_service.call
+    return render_error(fetch_service) unless fetch_service.valid?
+    render_200(fetch_service.data)
   end
 
   def show
@@ -18,7 +19,7 @@ class CarsController < ApplicationController
     if car.save
       render json: { msg: "Car ##{car.id} was created" }, status: :created
     else
-      render json: { errors: car.errors.full_messages }, status: :unprocessable_entity
+      render_error(car)
     end
   end
 
@@ -26,7 +27,7 @@ class CarsController < ApplicationController
     if @car.update(car_params)
       render json: { msg: "Car ##{@car.id} has been updated" }
     else
-      render json: { errors: @car.errors.full_messages }, status: :unprocessable_entity
+      render_error(@car)
     end
   end
 
@@ -34,24 +35,19 @@ class CarsController < ApplicationController
     if @car.destroy
       render json: { msg: "Car ##{@car.id} has been deleted" }
     else
-      render json: { errors: @car.errors.full_messages }, status: :unprocessable_entity
+      render_error(@car)
     end
   end
 
   private
 
-  def car_params
-    params.require(:car)
-          .permit(:owner_id, :car_make_id, :car_model_id, :year, :latitude, :longitude, :range)
+  def fetch_service
+    @fetch_service ||= ::Api::Cars::NearestCarsService.new(latitude: params[:latitude],
+                                                           longitude: params[:longitude],
+                                                           range: params[:range])
   end
 
   def set_car
     @car = Car.find(params[:id])
-  end
-
-  def set_car_params
-    @latitude  = params[:latitude]
-    @longitude = params[:longitude]
-    @range     = params[:range]
   end
 end

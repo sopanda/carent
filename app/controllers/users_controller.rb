@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
-  #before_action :authenticate_user, except: %i[create]
+  # before_action :authenticate_user, except: %i[create]
 
   def index
     @users = User.all
@@ -17,30 +19,35 @@ class UsersController < ApplicationController
       token = Knock::AuthToken.new(payload: { sub: user.id }).token
       render json: { msg: "User ##{user.id} was created", token: token }, status: :created
     else
-      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      render_error(user)
     end
   end
-  
-  def update 
+
+  def update
     if @user.update(user_params)
       render json: { msg: "User ##{@user.id} has been updated" }
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render_error(@user)
     end
   end
-  
-  def destroy 
+
+  def destroy
     if @user.destroy
       render json: { msg: "User ##{@user.id} has been deleted" }
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render_error(@user)
     end
   end
-  
+
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
+    params.permit(:first_name,
+                  :last_name,
+                  :username,
+                  :email,
+                  :password,
+                  :password_confirmation)
   end
 
   def set_user

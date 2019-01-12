@@ -1,35 +1,28 @@
-yura = User.create!(first_name: 'Yurii', 
-                    last_name: 'Rogulya', 
-                    username: 'relaxcore', 
+# frozen_string_literal: true
+
+yura = User.create!(first_name: 'Yurii',
+                    last_name: 'Rogulya',
+                    username: 'relaxcore',
                     email: 'yuriirogulya@gmail.com',
                     password: 'qweqwe')
-bogdan = User.create!(first_name: 'Bogdan', 
-                      last_name: 'Hushcha', 
-                      username: 'sopanda', 
+bogdan = User.create!(first_name: 'Bogdan',
+                      last_name: 'Hushcha',
+                      username: 'sopanda',
                       email: 'hushchabogdan@gmail.com',
                       password: 'qweqwe')
-jake = User.create!(first_name: 'Jake', 
-                    last_name: 'Helloworld', 
-                    username: 'qweqwe', 
+jake = User.create!(first_name: 'Jake',
+                    last_name: 'Helloworld',
+                    username: 'qweqwe',
                     email: 'test@gmail.com',
                     password: 'qweqwe')
-noname = User.create!(first_name: 'Pusya', 
-                      last_name: 'Kukusya', 
-                      username: 'pusichka98', 
+noname = User.create!(first_name: 'Pusya',
+                      last_name: 'Kukusya',
+                      username: 'pusichka98',
                       email: 'qweqwe@gmail.com',
                       password: 'qweqwe')
 
-tesla = CarMake.create!(name: 'Tesla')
-audi = CarMake.create!(name: 'Audi')
-
-model_s = CarModel.create!(car_make: tesla, name: 'Model S')
-roadster = CarModel.create!(car_make: tesla, name: 'Roadster')
-a8 = CarModel.create!(car_make: audi, name: 'A8')
-q5 = CarModel.create!(car_make: audi, name: 'Q5')
-
 car1 = Car.create!(owner: yura,
-                   car_make: tesla,
-                   car_model: roadster,
+                   model: 'Testa Roadster',
                    year: 2018,
                    latitude: 50.404101,
                    longitude: 24.239488,
@@ -37,8 +30,7 @@ car1 = Car.create!(owner: yura,
                    daily_price: 1000)
 
 car2 = Car.create!(owner: bogdan,
-                   car_make: tesla,
-                   car_model: model_s,
+                   model: 'Tesla Model S',
                    year: 2015,
                    latitude: 50.007562,
                    longitude: 22.018838,
@@ -46,8 +38,7 @@ car2 = Car.create!(owner: bogdan,
                    daily_price: 800)
 
 car3 = Car.create!(owner: yura,
-                   car_make: audi,
-                   car_model: a8,
+                   model: 'Audi A8',
                    year: 2010,
                    latitude: 49.816606,
                    longitude: 24.011255,
