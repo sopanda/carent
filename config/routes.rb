@@ -6,11 +6,17 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'user_token#create'
   post 'sign_up', to: 'users#create'
 
-  resources :users, except: :create
+  resources :users, except: :create do
+    resources :reviews, module: 'users'
+  end
 
-  resources :cars
+  resources :cars do
+    resources :reviews, module: 'cars'
+  end
 
-  resources :bookings do
-    resources :reviews
+  resources :bookings
+
+  namespace :admin do
+    # admin routes
   end
 end
