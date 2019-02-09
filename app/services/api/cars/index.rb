@@ -14,6 +14,7 @@ module Api
       attribute :data,      ::Car, lazy: true, default: :filtered_collection
 
       validates_presence_of :latitude, :longitude, :range
+      validates :latitude, :longitude, :range, numericality: true, if: -> { errors.blank? }
 
       def call
         return unless valid?

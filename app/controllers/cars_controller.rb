@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 class CarsController < ApplicationController
-  before_action :authenticate_user, except: %i[index show]
-  before_action :set_car, only: %i[show update destroy]
-
-  attr_reader :car
+  before_action :authenticate_user
 
   def index
     index_service.call
@@ -30,7 +27,7 @@ class CarsController < ApplicationController
 
   def destroy
     car.destroy
-    render_200(msg: 'Successfully deleted')
+    head :ok
   end
 
   private
@@ -50,7 +47,7 @@ class CarsController < ApplicationController
     params.permit(:price)
   end
 
-  def set_car
-    @car = Car.find(params[:id])
+  def car
+    @car ||= Car.find(params[:id])
   end
 end
