@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Users
   class ReviewsController < ApplicationController
     before_action :authenticate_user

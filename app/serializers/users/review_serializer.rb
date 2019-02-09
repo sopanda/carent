@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   class ReviewSerializer < ActiveModel::Serializer
     attributes :id, :text, :rating, :user, :author

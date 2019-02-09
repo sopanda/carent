@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     return render_error(created_user) if created_user.errors.present?
 
     token = Knock::AuthToken.new(payload: { sub: created_user.id }).token
-    render_200({jwt: token})
+    render_200(jwt: token)
   end
 
   def update

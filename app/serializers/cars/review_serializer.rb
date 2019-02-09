@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cars
   class ReviewSerializer < ActiveModel::Serializer
     attributes :id, :text, :rating, :car, :author
