@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_184535) do
+ActiveRecord::Schema.define(version: 2019_02_09_202755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_184535) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "author_id"
     t.index ["car_id"], name: "index_car_reviews_on_car_id"
   end
 
@@ -48,6 +49,12 @@ ActiveRecord::Schema.define(version: 2019_02_09_184535) do
     t.jsonb "address"
     t.string "status"
     t.integer "daily_price"
+    t.integer "doors"
+    t.string "transmission"
+    t.boolean "child_seat"
+    t.string "fuel_type"
+    t.integer "mileage"
+    t.string "color"
     t.index ["owner_id"], name: "index_cars_on_owner_id"
   end
 
@@ -68,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_02_09_184535) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "author_id"
     t.index ["user_id"], name: "index_user_reviews_on_user_id"
   end
 
