@@ -1,42 +1,33 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
-  # before_action :authenticate_user, except: %i[create]
+  before_action :authenticate_user, except: %i[create]
 
   def index
-    @users = User.all
-    render json: { users: @users }
+    render_200(User.all)
   end
 
   def show
-    render json: { user: @user }
+    render_200(user)
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      token = Knock::AuthToken.new(payload: { sub: user.id }).token
-      render json: { msg: "User ##{user.id} was created", token: token }, status: :created
-    else
-      render_error(user)
-    end
+    created_user = User.create(user_params)
+    return render_error(created_user) if created_user.errors.present?
+
+    token = Knock::AuthToken.new(payload: { sub: created_user.id }).token
+    render_200({jwt: token})
   end
 
   def update
-    if @user.update(user_params)
-      render json: { msg: "User ##{@user.id} has been updated" }
-    else
-      render_error(@user)
-    end
+    user.update(user_params)
+    return render_error(user) if user.errors.present?
+    render_200(user)
   end
 
   def destroy
-    if @user.destroy
-      render json: { msg: "User ##{@user.id} has been deleted" }
-    else
-      render_error(@user)
-    end
+    user.destroy
+    head :ok
   end
 
   private
@@ -50,7 +41,7 @@ class UsersController < ApplicationController
                   :password_confirmation)
   end
 
-  def set_user
-    @user = User.find(params[:id])
+  def user
+    @user ||= User.find(params[:id])
   end
 end

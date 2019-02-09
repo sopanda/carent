@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_many :written_user_reviews, class_name: 'User::Review', foreign_key: 'author_id'
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
-  validates :username, uniqueness: { case_sensitive: false },
-                       format: { without: /\s/ }
-  validates :first_name, :last_name, :email, presence: true
+  validates :username, format: { without: /\s/ } # add uniqness in external validation
+  validates :first_name, :last_name, :email, :username, presence: true
 end
