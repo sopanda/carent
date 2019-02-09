@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class Car < ApplicationRecord
-  has_many :reviews, class_name: 'Car::Review'
-  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
+  has_many :booking_requests, class_name: 'Car::BookingRequest', dependent: :destroy
+  has_many :reviews,          class_name: 'Car::Review',         dependent: :destroy
+
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id', dependent: :destroy
 
   validates :latitude, :longitude, :model, presence: true
   validates :latitude, :longitude, :daily_price, numericality: true
@@ -12,7 +14,7 @@ class Car < ApplicationRecord
                                  message: 'should be one of [2 4]' }
   validates :transmission, inclusion: { in: %w[auto semi-auto manual],
                                         message: 'should be one of [auto semi-auto manual]' }
-  validates :fuel_type, inclusion: { in: %w[gasoline diesel gas], 
+  validates :fuel_type, inclusion: { in: %w[gasoline diesel gas],
                                      message: 'should be one of [gasoline diesel gas]' }
 
   reverse_geocoded_by :latitude, :longitude
@@ -20,6 +22,6 @@ class Car < ApplicationRecord
 
   def set_geocoded_address
     raw_address = Geocoder.search("#{latitude}, #{longitude}").first.data['address']
-    update_column('address', raw_address)
+    update_column('address', raw_address) # rubocop:disable Rails/SkipsModelValidations
   end
 end

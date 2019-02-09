@@ -10,11 +10,14 @@ Rails.application.routes.draw do
     resources :reviews, module: 'users'
   end
 
+  resources :booking_requests, only: %i[index show], module: 'users'
+
   resources :cars do
+    resources :booking_requests, module: 'cars', only: %i[index create destroy]
     resources :reviews, module: 'cars'
   end
 
-  resources :bookings
+  resources :bookings, only: %i[index show]
 
   namespace :admin do
     # admin routes

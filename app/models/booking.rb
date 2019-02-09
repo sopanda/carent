@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Booking < ApplicationRecord
-  enum status: %i[started_soon ongoing ended]
-
   belongs_to :renter, inverse_of: :bookings, class_name: 'User'
   belongs_to :car
   has_many :reviews, dependent: :destroy
@@ -10,11 +8,14 @@ class Booking < ApplicationRecord
   validates :start_date, :end_date, presence: true
   validates_with ::Bookings::DateValidator
 
-  def total_rent_price
-    daily_price * total_days
-  end
+  after_save :set_total_price
 
-  def total_days
-    (end_date - start_date).to_i
+  def set_total_price
+    total_days  = (end_date - start_date).to_i
+    car         = Car.find(car_id)
+
+    total_price = car.daily_price * total_days
+
+    update_column('price', total_price) # rubocop:disable Rails/SkipsModelValidations
   end
 end

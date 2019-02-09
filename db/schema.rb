@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_202755) do
+ActiveRecord::Schema.define(version: 2019_02_09_223847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 2019_02_09_202755) do
     t.datetime "updated_at", null: false
     t.index ["car_id"], name: "index_bookings_on_car_id"
     t.index ["renter_id"], name: "index_bookings_on_renter_id"
+  end
+
+  create_table "car_booking_requests", force: :cascade do |t|
+    t.bigint "car_id"
+    t.bigint "sender_id"
+    t.index ["car_id"], name: "index_car_booking_requests_on_car_id"
+    t.index ["sender_id"], name: "index_car_booking_requests_on_sender_id"
   end
 
   create_table "car_reviews", force: :cascade do |t|
@@ -91,6 +98,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_202755) do
 
   add_foreign_key "bookings", "cars"
   add_foreign_key "bookings", "users", column: "renter_id"
+  add_foreign_key "car_booking_requests", "cars"
+  add_foreign_key "car_booking_requests", "users", column: "sender_id"
   add_foreign_key "car_reviews", "cars"
   add_foreign_key "cars", "users", column: "owner_id"
   add_foreign_key "user_reviews", "users"
