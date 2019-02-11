@@ -40,8 +40,8 @@ class CarsController < ApplicationController
   end
 
   def car_params
-    params.permit(:model, :year, :latitude, :longitude, :daily_price,
-                  :doors, :transmission, :fuel_type, :mileage)
+    params.permit(:model, :year, :latitude, :longitude, :daily_price, :photo,
+                  :doors, :transmission, :fuel_type, :mileage, :child_seat, :color)
   end
 
   def filter_params

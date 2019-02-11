@@ -40,6 +40,7 @@ class UsersController < ApplicationController
                   :last_name,
                   :username,
                   :email,
+                  :phone_number,
                   :password,
                   :password_confirmation)
   end
