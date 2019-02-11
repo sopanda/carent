@@ -30,6 +30,9 @@ class UsersController < ApplicationController
     head :ok
   end
 
+  def profile
+    render_200(current_user)
+  end
   private
 
   def user_params

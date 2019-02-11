@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'user_token#create'
   post 'sign_up', to: 'users#create'
 
+  get 'profile', to: 'users#profile'
+
   resources :users, except: :create do
     resources :reviews, module: 'users'
   end
