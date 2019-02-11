@@ -16,6 +16,7 @@ class Car < ApplicationRecord
                                         message: 'should be one of [auto semi-auto manual]' }
   validates :fuel_type, inclusion: { in: %w[gasoline diesel gas],
                                      message: 'should be one of [gasoline diesel gas]' }
+  validates_with ::Bookings::DateValidator
 
   reverse_geocoded_by :latitude, :longitude
   after_save :set_geocoded_address

@@ -28,7 +28,7 @@ module Api
       attribute :filtered_collection,      Object, lazy: true, default: :fetch_filtered_collection
 
       def fetch_default_scope_collection
-        Car.where(nil)
+        Car.where(status: 'available')
       end
 
       def fetch_filtered_collection

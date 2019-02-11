@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_200449) do
+ActiveRecord::Schema.define(version: 2019_02_11_215947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,9 @@ ActiveRecord::Schema.define(version: 2019_02_11_200449) do
     t.integer "mileage"
     t.string "color"
     t.string "photo"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text "description"
     t.index ["owner_id"], name: "index_cars_on_owner_id"
   end
 
