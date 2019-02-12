@@ -9,6 +9,10 @@ class CarsController < ApplicationController
     render_200(index_service.data)
   end
 
+  def user_cars
+    render_200(current_user.cars)
+  end
+
   def show
     render_200(car)
   end

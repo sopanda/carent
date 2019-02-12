@@ -35,6 +35,20 @@ ActiveRecord::Schema.define(version: 2019_02_11_215947) do
     t.index ["sender_id"], name: "index_car_booking_requests_on_sender_id"
   end
 
+  create_table "car_makes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "car_models", force: :cascade do |t|
+    t.string "name"
+    t.bigint "car_make_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_make_id"], name: "index_car_models_on_car_make_id"
+  end
+
   create_table "car_reviews", force: :cascade do |t|
     t.bigint "car_id"
     t.string "text"
@@ -105,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_215947) do
   add_foreign_key "bookings", "users", column: "renter_id"
   add_foreign_key "car_booking_requests", "cars"
   add_foreign_key "car_booking_requests", "users", column: "sender_id"
+  add_foreign_key "car_models", "car_makes"
   add_foreign_key "car_reviews", "cars"
   add_foreign_key "cars", "users", column: "owner_id"
   add_foreign_key "user_reviews", "users"
