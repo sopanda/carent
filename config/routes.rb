@@ -13,7 +13,12 @@ Rails.application.routes.draw do
     resources :reviews, module: 'users'
   end
 
-  resources :booking_requests, only: %i[index show], module: 'users'
+  scope module: 'users' do
+    resources :booking_requests, only: %i[index show] do
+      get 'approve', to: 'booking_requests#approve'
+      get 'decline', to: 'booking_requests#decline'
+    end
+  end
 
   resources :cars do
     scope module: "cars" do
