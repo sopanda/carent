@@ -24,10 +24,11 @@ class Car < ApplicationRecord
     end
   end
 
-  has_many :booking_requests, class_name: 'Car::BookingRequest', dependent: :destroy
-  has_many :reviews,          class_name: 'Car::Review',         dependent: :destroy
+  has_many :booking_requests, class_name: '::Car::BookingRequest', dependent: :destroy
+  has_many :reviews,          class_name: '::Car::Review',         dependent: :destroy
+  has_many :bookings,                                              dependent: :destroy
 
-  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id', dependent: :destroy
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
   validates :latitude, :longitude, :model, presence: true
   validates :latitude, :longitude, :daily_price, numericality: true

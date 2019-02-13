@@ -3,7 +3,6 @@
 class Booking < ApplicationRecord
   belongs_to :renter, inverse_of: :bookings, class_name: 'User'
   belongs_to :car
-  has_many :reviews, dependent: :destroy
 
   validates :start_date, :end_date, presence: true
   validates_with ::Bookings::DateValidator
