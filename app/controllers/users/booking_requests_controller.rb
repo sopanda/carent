@@ -13,9 +13,11 @@ module Users
     end
 
     def approve
+      return render_text_error('сar is no longer available') unless car.available?
       # delete booking request and create booking, in future set status to approved
       created_booking = Booking.create(booking_params)
       return render_error(created_booking) if created_booking.errors.present?
+      car.use!
       booking_request.delete
       render_200(created_booking)
     end
@@ -34,6 +36,10 @@ module Users
         renter: current_user,
         car: booking_request.car
       }
+    end
+
+    def car
+      @car ||= booking_request.car
     end
 
     def booking_request
