@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CarSerializer < ActiveModel::Serializer
-  attributes :id, :model, :description, :start_date, :end_date, :year, :status, :daily_price, :doors,
+  attributes :id, :model, :description, :start_date, :end_date, :year, :status, :daily_price, :doors, :air_conditioner,
   :latitude, :longitude, :transmission, :child_seat, :fuel_type, :mileage, :color, :owner, :address, :photo
 
   belongs_to :owner

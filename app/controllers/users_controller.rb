@@ -42,7 +42,8 @@ class UsersController < ApplicationController
                   :email,
                   :phone_number,
                   :password,
-                  :password_confirmation)
+                  :password_confirmation,
+                  :photo)
   end
 
   def user
