@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   resources :cars do
     scope module: "cars" do
-      get 'activate',   to: 'availability#activate'
-      get 'deactivate', to: 'availability#deactivate'
+      post 'activate',   to: 'availability#activate'
+      post 'deactivate', to: 'availability#deactivate'
       resources :booking_requests, only: %i[index create destroy]
       resources :reviews
     end
