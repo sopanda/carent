@@ -16,6 +16,11 @@ class ApplicationController < ActionController::API
            status: :unprocessable_entity
   end
 
+  def render_text_error(msg)
+    render json: { errors: msg },
+           status: :unprocessable_entity
+  end
+
   private
 
   def not_found

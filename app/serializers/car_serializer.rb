@@ -13,4 +13,8 @@ class CarSerializer < ActiveModel::Serializer
   def end_date
     object[:end_date]&.strftime('%I:%M %m/%d/%Y')
   end
+
+  def status
+    object[:aasm_state]
+  end
 end

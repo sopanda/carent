@@ -1,6 +1,29 @@
 # frozen_string_literal: true
 
 class Car < ApplicationRecord
+  include AASM
+
+  aasm do
+    state :pending, initial: true
+    state :in_use, :available
+
+    event :use do
+      transitions from: :available, to: :in_use
+    end
+
+    event :return do
+      transitions from: :is_use, to: :pending
+    end
+
+    event :enable do
+      transitions from: :pending, to: :available
+    end
+
+    event :disable do
+      transitions from: :available, to: :pending
+    end
+  end
+
   has_many :booking_requests, class_name: 'Car::BookingRequest', dependent: :destroy
   has_many :reviews,          class_name: 'Car::Review',         dependent: :destroy
 

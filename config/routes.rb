@@ -16,8 +16,12 @@ Rails.application.routes.draw do
   resources :booking_requests, only: %i[index show], module: 'users'
 
   resources :cars do
-    resources :booking_requests, module: 'cars', only: %i[index create destroy]
-    resources :reviews, module: 'cars'
+    scope module: "cars" do
+      get 'activate',   to: 'availability#activate'
+      get 'deactivate', to: 'availability#deactivate'
+      resources :booking_requests, only: %i[index create destroy]
+      resources :reviews
+    end
   end
 
   resources :bookings, only: %i[index show]
