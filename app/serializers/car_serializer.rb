@@ -17,4 +17,8 @@ class CarSerializer < ActiveModel::Serializer
   def status
     object[:aasm_state]
   end
+
+  def photo
+    object.photo.service_url.split('?').first if object.photo.attached?
+  end
 end

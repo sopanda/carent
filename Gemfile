@@ -43,3 +43,4 @@ gem 'knock'
 gem 'virtus'
 gem 'ffaker'
 gem 'aasm'
+gem "aws-sdk-s3", require: false

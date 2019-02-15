@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_one_attached :photo
+
   has_many :cars,     foreign_key: 'owner_id',    dependent: :destroy
   has_many :bookings, foreign_key: 'renter_id',   dependent: :destroy
   has_many :reviews,  class_name: 'User::Review', dependent: :destroy

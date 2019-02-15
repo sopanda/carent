@@ -24,6 +24,8 @@ class Car < ApplicationRecord
     end
   end
 
+  has_one_attached :photo
+
   has_many :booking_requests, class_name: '::Car::BookingRequest', dependent: :destroy
   has_many :reviews,          class_name: '::Car::Review',         dependent: :destroy
   has_many :bookings,                                              dependent: :destroy
