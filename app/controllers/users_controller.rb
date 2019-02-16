@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     render_200(User.all)
   end
 
+  def unverified
+    render_200(User.unverified)
+  end
+
   def show
     render_200(user)
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Car::ContentTypeValidator < ActiveModel::EachValidator
+class ContentTypeValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return unless value.attached?
     unless value.attached? && value.content_type.in?(content_types)
