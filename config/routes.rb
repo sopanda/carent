@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'unverified_users', to: 'users#unverified'
   get 'profile',          to: 'users#profile'
   get 'my_cars',          to: 'cars#user_cars'
+  get 'my_orders',        to: 'cars#my_orders'
+  get 'my_loans',         to: 'cars#my_loans'
 
   resources :users, except: :create do
     scope module: 'users' do 

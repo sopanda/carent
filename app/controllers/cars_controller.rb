@@ -13,6 +13,17 @@ class CarsController < ApplicationController
     render_200(current_user.cars)
   end
 
+  def my_loans
+    my_cars = current_user.cars
+    bookings = Booking.where(car: my_cars).active
+    render_200(Car.where(bookings: bookings))
+  end
+
+  def my_orders
+    bookings = current_user.bookings.active
+    render_200(Car.where(bookings: bookings))
+  end
+
   def show
     render_200(car)
   end
