@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 class Booking < ApplicationRecord
+  include AASM
+
+  aasm do
+    state :active, initial: true
+    state :completed
+
+    event :finish do
+      transitions from: :active, to: :completed
+    end
+  end
+
   belongs_to :renter, inverse_of: :bookings, class_name: 'User'
   belongs_to :car
 

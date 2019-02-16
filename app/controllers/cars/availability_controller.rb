@@ -19,7 +19,9 @@ module Cars
         car.update(description: description, 
                    start_date: start_date,
                    end_date: end_date)
-        render_200(msg: car.enable!)
+        car.enable!
+        return render_error(car) if car.errors.present?
+        render_200(msg: true)
       else
         render_text_error('should be in pending state!')
       end

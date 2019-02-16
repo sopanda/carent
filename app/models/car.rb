@@ -12,7 +12,7 @@ class Car < ApplicationRecord
     end
 
     event :return do
-      transitions from: :is_use, to: :pending
+      transitions from: :in_use, to: :pending
     end
 
     event :enable do

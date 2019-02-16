@@ -37,7 +37,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bookings, only: %i[index show]
+  resources :bookings, only: %i[index show] do
+    get 'finish', to: 'bookings#finish'
+  end
 
   namespace :admin do
     # admin routes

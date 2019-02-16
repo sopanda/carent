@@ -22,7 +22,7 @@ module Cars
     private
 
     def car
-      @car ||= Car.find(params[:car_id])
+      @car ||= Car.available.find(params[:car_id])
     end
 
     def booking_request

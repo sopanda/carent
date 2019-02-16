@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_16_175910) do
+ActiveRecord::Schema.define(version: 2019_02_16_194634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_02_16_175910) do
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "aasm_state"
     t.index ["car_id"], name: "index_bookings_on_car_id"
     t.index ["renter_id"], name: "index_bookings_on_renter_id"
   end

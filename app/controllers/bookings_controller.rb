@@ -10,4 +10,20 @@ class BookingsController < ApplicationController
   def show
     render_200(current_user.bookings.find(params[:id]))
   end
+
+  def finish
+    if booking.active?
+      booking.finish!
+      booking.car.return!
+      render_200(msg: true)
+    else
+      render_text_error('should be in active state!')
+    end
+  end
+
+  private
+
+  def booking
+    @booking ||= current_user.bookings.find(params[:booking_id])
+  end
 end
