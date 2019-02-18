@@ -33,7 +33,7 @@ module Users
       {
         start_date: booking_request.car.start_date,
         end_date: booking_request.car.end_date,
-        renter: current_user,
+        renter: booking_request.sender,
         car: booking_request.car
       }
     end

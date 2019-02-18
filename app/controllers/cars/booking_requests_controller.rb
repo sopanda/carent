@@ -9,6 +9,7 @@ module Cars
     end
 
     def create
+      return render_text_error('you can\'t request your own car!') if car.owner == current_user
       created_request = car.booking_requests.create(sender: current_user)
       return render_error(created_request) if created_request.errors.present?
       render_200(created_request)

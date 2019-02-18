@@ -46,7 +46,7 @@ class Car < ApplicationRecord
   validates_with ::Bookings::DateValidator
 
   reverse_geocoded_by :latitude, :longitude
-  #after_save :set_geocoded_address
+  after_save :set_geocoded_address
 
   def set_geocoded_address
     raw_address = Geocoder.search("#{latitude}, #{longitude}").first.data['address']

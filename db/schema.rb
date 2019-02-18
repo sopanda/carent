@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2019_02_16_194634) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.string "address"
+    t.jsonb "address"
     t.integer "daily_price"
     t.integer "doors"
     t.string "transmission"
