@@ -10,7 +10,6 @@
               fuel_type:    %w[gasoline diesel gas].sample,
               mileage:      rand(10000..100000),
               color:        FFaker::Vehicle.base_color,
-              photo:        FFaker::Image.url,
-              status:       'pending',
+              air_conditioner: [true, false].sample,
               owner:        User.find(rand(1..4)))
 end

@@ -2,7 +2,7 @@
 
 class CarSerializer < ActiveModel::Serializer
   attributes :id, :model, :description, :start_date, :end_date, :year, :status, :daily_price, :doors, :air_conditioner,
-  :latitude, :longitude, :transmission, :child_seat, :fuel_type, :mileage, :color, :owner, :address, :photo, :renter
+  :latitude, :longitude, :transmission, :child_seat, :fuel_type, :mileage, :color, :owner, :address, :photo, :renter, :booking
 
   belongs_to :owner
   belongs_to :renter
@@ -25,5 +25,9 @@ class CarSerializer < ActiveModel::Serializer
 
   def renter
     Booking.where(car: object)&.last&.renter
+  end
+  
+  def booking
+    Booking.where(car: object)&.last
   end
 end
